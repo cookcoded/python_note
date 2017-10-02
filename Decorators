@@ -82,3 +82,19 @@ def foo():
     print("inside foo()")
 
 foo()
+
+
+"""Method decorator"""
+def log(mth):
+    def wrapper(self, *args, **kwargs):
+        print(self, args, kwargs)
+        return mth(self, *args, **kwargs)
+    return wrapper
+
+class Some:
+    @log
+    def doIt(self, a, b):
+        return a + b
+
+s = Some()
+print(s.doIt(1, 2))
